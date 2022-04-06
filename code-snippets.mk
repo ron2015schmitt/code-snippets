@@ -12,5 +12,13 @@ cleanexec: FORCE
 test : FORCE 
 	TEST=hello
 	echo $${TEST}
+	echo $$$$  #PID
 	echo $$$$
-	echo $$$$
+	if [[ $${TEST} == hello ]] 
+	then
+	echo "test is hello"
+	else
+	echo "test is not hello"
+	fi
+
+
