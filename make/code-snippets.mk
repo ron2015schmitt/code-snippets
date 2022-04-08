@@ -22,3 +22,14 @@ test : FORCE
 	fi
 
 
+# create an intermediate source file and then compile that file
+%.o: %.cpp 
+ifdef MATHQ_COPTS
+	@\echo "#define MATHQ_COPTS 1" > $*.cpp__opts
+	@\echo "char COMPILER_OPT_STR[] = "\"$(OPTIMIZE)\";" >> $*.cpp__opts
+	@\cat $*.cpp >> $*.cpp__opts
+	$(CPPC) $(CFLAGS) $(EXTRAS) -D"MATHQ_COPTS" -c $*.cpp__opts -o $@
+else
+	$(CPPC) $(CFLAGS) $(EXTRAS) -c $*.cpp -o $@
+endif
+
