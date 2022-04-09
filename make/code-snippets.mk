@@ -33,3 +33,15 @@ else
 	$(CPPC) $(CFLAGS) $(EXTRAS) -c $*.cpp -o $@
 endif
 
+# using styles in a bash echo command from a makefile
+style:
+# INCORRECT -> styles inside of quotes: get '\e[34m''\e[1m'
+	@echo
+	@echo "verbatim $(BLUE)$(BOLD)INCORRECT$(DEFCLR)$(NORMAL) hello world"
+	@echo -e "verbatim $(BLUE)$(BOLD)INCORRECT$(DEFCLR)$(NORMAL) hello world"	
+# CORRECT -> styles outside of quotes: get \e[34m\e[1m
+	@echo
+	@echo "verbatim "$(BLUE)$(BOLD)"CORRECT"$(DEFCLR)$(NORMAL)" hello world"
+	@echo -e "verbatim "$(BLUE)$(BOLD)"CORRECT"$(DEFCLR)$(NORMAL)" hello world"
+
+
