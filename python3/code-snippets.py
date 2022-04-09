@@ -8,8 +8,8 @@ today = datetime.datetime.now().strftime("%d %B %Y")
 # command line argument processing
 import sys
 usage="""
-USAGE: python3 script.py filename 
-"""
+USAGE: python3 {} filename
+""".format(sys.argv[0])
 n = len(sys.argv)
 if n != 2:  # script.py is sys.argv[0]
     print("Invalid number of command line arguments ({})\n".format(n) + usage)
