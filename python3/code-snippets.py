@@ -17,3 +17,7 @@ if n != 2:  # script.py is sys.argv[0]
 
 scriptname = sys.argv[0]
 filename = sys.argv[1]
+
+
+# check to see if a file exists and then delete it if so
+if os.path.exists(fname):  os.remove(fname)
