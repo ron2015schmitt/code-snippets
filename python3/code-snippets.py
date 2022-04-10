@@ -22,5 +22,5 @@ filename = sys.argv[1]
 # check to see if a file exists and then delete it if so
 if os.path.exists(fname):  os.remove(fname)
 
-
+# current working directory.  this will be where script was called from not script location
 print(os.getcwd())
