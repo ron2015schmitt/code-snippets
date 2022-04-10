@@ -19,8 +19,12 @@ scriptname = sys.argv[0]
 filename = sys.argv[1]
 
 
-# check to see if a file exists and then delete it if so
-if os.path.exists(fname):  os.remove(fname)
+# check to see if a file exists and then delete it if so, regardless of write permissions (as long as owner)
+def delete(fname):
+  if os.path.exists(fname):  
+    os.chmod(fname, 0o777)
+    os.remove(fname)
+
 
 # current working directory.  this will be where script was called from not script location
 print(os.getcwd())
