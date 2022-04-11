@@ -56,15 +56,23 @@ style:
 #############################################################
 SUBMAKES := $(wildcard */Makefile)
 SUBDIRS := $(dir $(SUBMAKES))
-$(SUBDIRS):
-	$(MAKE) -C $@
+SUBDIRSCLEAN=$(addprefix clean_,$(SUBDIRS))
 
 .PHONY: all $(SUBDIRS)
 
-# use this to verify you got it right
+$(SUBDIRS):
+	$(MAKE) -C $@
+
+clean_%: FORCE
+	$(MAKE) -C $* clean
+
+cleansubs: $(SUBDIRSCLEAN)
+
+# use this recipe to verify you got it right
 test: FORCE
 	@echo $(SUBMAKES)
 	@echo $(SUBDIRS)
+	@echo $(SUBDIRSCLEAN)
 
 
 
