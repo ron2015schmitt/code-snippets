@@ -1,13 +1,16 @@
 
-
+#############################################################
 # be very careful with this one
 # remove all executables
+#############################################################
 EXECUTABLES = $(shell find . -type f -executable)
 cleanexec: FORCE
 	@command rm -f $(EXECUTABLES)
 
+#############################################################
 # execute all commands of a recipe in one shell so that variables can be used
 # need make v3.8.2 or later
+#############################################################
 .ONESHELL:
 test : FORCE 
 	TEST=hello
@@ -22,7 +25,9 @@ test : FORCE
 	fi
 
 
+#############################################################
 # create an intermediate source file and then compile that file
+#############################################################
 %.o: %.cpp 
 ifdef MATHQ_COPTS
 	@\echo "#define MATHQ_COPTS 1" > $*.cpp__opts
@@ -33,7 +38,9 @@ else
 	$(CPPC) $(CFLAGS) $(EXTRAS) -c $*.cpp -o $@
 endif
 
+#############################################################
 # using styles in a bash echo command from a makefile
+#############################################################
 style:
 # INCORRECT -> styles inside of quotes: get '\e[34m''\e[1m'
 	@echo
@@ -43,5 +50,21 @@ style:
 	@echo
 	@echo "verbatim "$(BLUE)$(BOLD)"CORRECT"$(DEFCLR)$(NORMAL)" hello world"
 	@echo -e "verbatim "$(BLUE)$(BOLD)"CORRECT"$(DEFCLR)$(NORMAL)" hello world"
+
+#############################################################
+# run makefiles in all subdirectories that have makefiles
+#############################################################
+SUBMAKES := $(wildcard */Makefile)
+SUBDIRS := $(dir $(SUBMAKES))
+$(SUBDIRS):
+	$(MAKE) -C $@
+
+.PHONY: all $(SUBDIRS)
+
+# use this to verify you got it right
+test: FORCE
+	@echo $(SUBMAKES)
+	@echo $(SUBDIRS)
+
 
 
