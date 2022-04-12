@@ -74,5 +74,15 @@ test: FORCE
 	@echo $(SUBDIRS)
 	@echo $(SUBDIRSCLEAN)
 
+#############################################################
+# ujsing filter-out
+#############################################################
+varglob := a1 a2 a3 a4 a5 a6 b7 b8 b-whatever
+has-no-ticket := a3 b%  # a3 and all the b's didn't pay the ride
+varglobelim := $(filter-out $(has-no-ticket),$(varglob))
 
+test: FORCE
+	@echo $(varglob)
+	@echo $(has-no-ticket)
+	@echo $(varglobelim)
 
