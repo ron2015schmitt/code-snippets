@@ -94,3 +94,16 @@ test: FORCE
 .SECONDEXPANSION:  # use this so that we can use $$==% as prerequisites 
 %/README.md: $(CREATE_DOC_LEAF) branch.json $$/title.md $$/body.md $$/node.json
 	python3 $(CREATE_DOC_LEAF) $*
+	
+	
+#############################################################
+# Define a recipe multiple times
+# Normally this causes issues, but if you use a double colon (::)
+# you can define multiple times and then all of the recipes run
+# in the order they are defined
+#############################################################
+cleanall:: cleansubs
+
+cleanall::
+	\rm -r *.o
+
