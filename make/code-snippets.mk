@@ -89,11 +89,11 @@ test: FORCE
 
 #############################################################
 # you can't use "%" more than once in prerequisites
-# But with SECONDEXPANSION you can use $$ as a work-around
+# But with SECONDEXPANSION you can use $$* as a work-around
 #############################################################
-.SECONDEXPANSION:  # use this so that we can use $$==% as prerequisites 
-%/README.md: $(CREATE_DOC_LEAF) branch.json $$/title.md $$/body.md $$/node.json
-	python3 $(CREATE_DOC_LEAF) $*
+.SECONDEXPANSION:
+%.a: $$*.$$*.b
+	echo Making $@ from $<
 	
 	
 #############################################################
