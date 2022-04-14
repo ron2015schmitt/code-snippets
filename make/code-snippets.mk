@@ -6,34 +6,48 @@
 # CASE 1: using targets WITHOUT wildcards (SENSIBLE ERROR)
 
 > cat Makefile
-temp.1: temp.2
+temp.2: temp.1
 	@echo Making $@ from $<
+	@touch $@
 
-> touch temp.2
-> make temp.1
-Making temp.1 from temp.2
+> touch temp.1
+> make temp.2
+Making temp.2 from temp.1
 
-> rm temp.2
-> make temp.1
-make: *** No rule to make target 'temp.2', needed by 'temp.1'.  Stop.
+> rm temp.1
+> make temp.2
+make: *** No rule to make target 'temp.1', needed by 'temp.2'.  Stop.
 
 
 # CASE 2: using targets WITH wildcards (CONFUSING ERROR)
 
 > cat Makefile
-%.1: %.2
+%.2: %.1
 	@echo Making $@ from $<
+	@touch $@
 	
-> touch temp.2
-> make temp.1
-Making temp.1 from temp.2
+> touch temp.1
+> make temp.2
+Making temp.2 from temp.1
 
-> rm temp.2
-> make temp.1
-make: *** No rule to make target 'temp.1'.  Stop.
+> rm temp.1
+> make temp.2
+make: *** No rule to make target 'temp.2'.  Stop.
 
 # ^^^^ But the rule does exist. It's the prerequisite that doesn't exist!!!
 # *************BEWARE*************
+
+
+# The following seems to fix the issue
+%.1:
+	@[[ ! -f $@ ]] && echo -e ${RED}"Can't find file "$@${DEFCLR} && exit 1
+
+%.2: %.1 
+	@echo Making $@ from $<
+	@touch $@
+
+# could also make use of bash -nt test (newer than)
+#	@[[ $< -nt $@ ]] && echo Making $@ from $<
 
 
 
