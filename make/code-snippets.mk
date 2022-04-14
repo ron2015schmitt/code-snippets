@@ -1,5 +1,43 @@
 
 #############################################################
+# THe most confusing ERROR in make 
+#############################################################
+
+# CASE 1: using targets WITHOUT wildcards (SENSIBLE ERROR)
+
+> cat Makefile
+temp.1: temp.2
+	@echo Making $@ from $<
+
+> touch temp.2
+> make temp.1
+Making temp.1 from temp.2
+
+> rm temp.2
+> make temp.1
+make: *** No rule to make target 'temp.2', needed by 'temp.1'.  Stop.
+
+
+# CASE 2: using targets WITH wildcards (CONFUSING ERROR)
+
+> cat Makefile
+%.1: %.2
+	@echo Making $@ from $<
+	
+> touch temp.2
+> make temp.1
+Making temp.1 from temp.2
+
+> rm temp.2
+> make temp.1
+make: *** No rule to make target 'temp.1'.  Stop.
+
+# ^^^^ But the rule does exist. It's the prerequisite that doesn't exist!!!
+# *************BEWARE*************
+
+
+
+#############################################################
 # be very careful with this one
 # remove all executables
 #############################################################
@@ -90,6 +128,7 @@ test: FORCE
 #############################################################
 # you can't use "%" more than once in prerequisites
 # But with SECONDEXPANSION you can use $$* as a work-around
+# CAVEAT: see make's most confusing ERROR above
 #############################################################
 .SECONDEXPANSION:
 %.a: $$*.$$*.b
