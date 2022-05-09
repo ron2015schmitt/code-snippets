@@ -63,6 +63,8 @@ cleanexec: FORCE
 # execute all commands of a recipe in one shell so that variables can be used
 # need make v3.8.2 or later
 #############################################################
+# *****CAVEAT*******
+# If the .ONESHELL special target appears ANYWHERE in the makefile then all recipe lines for each target will be provided to a single invocation of the shell. Newlines between recipe lines will be preserved.
 .ONESHELL:
 test : FORCE 
 	TEST=hello
