@@ -11,3 +11,11 @@ echo "${FILE#*.}"
 
 # gz
 echo "${FILE##*.}"
+
+
+# remove one or more trailing slashes
+DIR="test/"
+echo ${DIR%%+(/)}
+
+DIR="test//"
+echo ${DIR%%+(/)}
