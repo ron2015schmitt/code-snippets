@@ -41,7 +41,7 @@ type ABC = {
 
 ### EXAMPLE: Interface AND operator
 
-The same syntax works with `interface`s.
+The same syntax works with `interface`'s.
 
 ```TypeScript
 interface A_I {
