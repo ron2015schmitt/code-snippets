@@ -25,12 +25,13 @@ is equivalent to
 ```TypeScript
 type ABC = { a: number } & { b: string } & { c: boolean };
 ```
- and 
+
+ or simply
 
  ```TypeScript
 type ABC = {
-a: number,
-b: string,
-c: boolean,
+  a: number,
+  b: string,
+  c: boolean,
 };
 ```
