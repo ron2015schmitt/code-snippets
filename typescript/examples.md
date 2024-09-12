@@ -38,3 +38,21 @@ type ABC = {
   c: boolean,
 };
 ```
+
+### EXAMPLE: Interface AND operator
+
+The same syntax works with `interface`s.
+
+```TypeScript
+interface A_I {
+  a: number,
+};
+
+interface B_I {
+  b: string,
+};
+
+let p1: A_I = { a: 10 };
+let p2: B_I = { b: "hello" };
+let p3: A_I & B_I = { a: 10, b: "times" };
+```
