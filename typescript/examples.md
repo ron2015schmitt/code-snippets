@@ -1,12 +1,12 @@
 
 ### EXAMPLE: destructured function parameters
-Similar to JavaScript but TypeScript requires a name be given, such as `args` below 
+Similar to JavaScript but TypeScript requires a name be given, such as `args` in the example below 
 
 ```TypeScript
 function foo(args: {
   x: number,
   s: string, 
-  }) {
+  }): string {
   const { x, s } = args;
   return s + x.toString();
 }
