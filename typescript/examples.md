@@ -55,4 +55,17 @@ interface B_I {
 let p1: A_I = { a: 10 };
 let p2: B_I = { b: "hello" };
 let p3: A_I & B_I = { a: 10, b: "times" };
+
+export class MyClass implements A_I, B_I {
+  a: number;
+  b: string;
+
+  constructor(args: A_I & B_I) {
+    this.a = args.a;
+    this.b = args.b;
+  }
+}
+
 ```
+
+
