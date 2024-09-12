@@ -19,8 +19,11 @@ type A = { a: number };
 type B = { b: string };
 type C = { c: boolean };
 type ABC = A & B & C;
+
+let y: ABC = { a: 10, b: "hello", c: true };
+
 ```
-is equivalent to 
+The above type is equivalent to 
 
 ```TypeScript
 type ABC = { a: number } & { b: string } & { c: boolean };
@@ -28,7 +31,7 @@ type ABC = { a: number } & { b: string } & { c: boolean };
 
  or simply
 
- ```TypeScript
+```TypeScript
 type ABC = {
   a: number,
   b: string,
