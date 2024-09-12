@@ -20,8 +20,12 @@ type B = { b: string };
 type C = { c: boolean };
 type ABC = A & B & C;
 
-let y: ABC = { a: 10, b: "hello", c: true };
+const y: ABC = { a: 10, b: "hello", c: true };
 
+function foo(args: ABC): string {
+  const { a, b, c }: ABC = args;
+  return a.toString() + b + c.toString();
+}
 ```
 The above type is equivalent to 
 
