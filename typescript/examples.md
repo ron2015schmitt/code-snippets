@@ -100,5 +100,10 @@ export class MyClass implements A_I, B_I {
 ### EXAMPLE: Type OR operator
 
 
+### EXAMPLE: Type XOR operator
+
+
+
+
 
 
